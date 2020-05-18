@@ -25,14 +25,14 @@ class LaravelDialogflowServiceProvider extends ServiceProvider
   */
   public function boot()
   {
-    if(file_exists(base_path('routes/Dialogflow-intents.php'))) {
-      require base_path('routes/Dialogflow-intents.php');
+    if(file_exists(base_path('routes/dialogflow-intents.php'))) {
+      require base_path('routes/dialogflow-intents.php');
     }
 
     $this->loadRoutesFrom(__DIR__.'/routes/web.php');
 
     $this->publishes([
-      __DIR__.'/routes/Dialogflow-intents.php' => base_path('routes/Dialogflow-intents.php')
+      __DIR__.'/routes/dialogflow-intents.php' => base_path('routes/dialogflow-intents.php')
     ], 'routes');
 
     $this->publishes([
