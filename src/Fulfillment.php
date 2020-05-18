@@ -49,7 +49,6 @@ class Fulfillment
       $class = "App\Dialogflow\Intents\\$handler";
       $instance = new $class();
       $response = $instance->handle($request);
-      \Log::info($response);
       return $response;
     }
   }

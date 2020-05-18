@@ -16,7 +16,21 @@ class DialogflowResponse {
   *
   * @var array
   */
-  public $messages = array();
+  private $messages = array();
+
+  /**
+  * Response Followup Event Input.
+  *
+  * @var array
+  */
+  private $followupEventInput = array();
+
+  /**
+  * Response Output Contexts.
+  *
+  * @var array
+  */
+  private $outputContexts = array();
 
   /**
   * Dialogflow Request Constructor.
@@ -42,6 +56,45 @@ class DialogflowResponse {
   }
 
   /**
+  * Add Response Output Context.
+  *
+  * @param string context_name
+  * @param array params
+  * @param int lifespan
+  * @return $this
+  */
+  public function addOutputContext(string $context_name, array $params = array(), int $lifespan = 5)
+  {
+    $data = [
+      'name' => $this->request->session . "/contexts/$context_name",
+      'lifespanCount' => $lifespan,
+    ];
+    if(count($params) > 0) {
+      $data['parameters'] = $params;
+    }
+    array_push($this->outputContexts, $data);
+    return $this;
+  }
+
+  /**
+  * Add Response Followup Event Input.
+  *
+  * @param string name
+  * @param array params
+  * @return $this
+  */
+  public function followupEvent(string $name, array $params)
+  {
+    $data = [
+      'name' => $name,
+    ];
+    if(count($params) > 0) {
+      $data['parameters'] = $params;
+    }
+    $this->followupEventInput = $data;
+  }
+
+  /**
    * Returns the Response as an string.
    *
    * @return string
@@ -57,7 +110,9 @@ class DialogflowResponse {
             )
           )
         )
-      )
+      ),
+      'outputContexts' => $this->outputContexts,
+      'followupEventInput' => $this->followupEventInput
     );
     return json_encode($response);
   }
