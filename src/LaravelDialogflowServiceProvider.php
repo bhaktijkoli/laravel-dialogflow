@@ -29,6 +29,12 @@ class LaravelDialogflowServiceProvider extends ServiceProvider
       require base_path('routes/dialogflow-intents.php');
     }
 
+    if ($this->app->runningInConsole()) {
+      $this->commands([
+        \BhaktijKoli\LaravelDialogflow\Commands\DialogflowIntent::class,
+      ]);
+    }
+
     $this->loadRoutesFrom(__DIR__.'/routes/web.php');
 
     $this->publishes([

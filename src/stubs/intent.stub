@@ -1,0 +1,27 @@
+<?php
+namespace App\Dialogflow\Intents;
+
+use BhaktijKoli\LaravelDialogflow\IntentHandler;
+use BhaktijKoli\LaravelDialogflow\DialogflowRequest;
+use BhaktijKoli\LaravelDialogflow\DialogflowQuickResponse;
+use BhaktijKoli\LaravelDialogflow\DialogflowResponse;
+
+class {{class}} extends IntentHandler
+{
+
+  /**
+  * Handle Dialogflow Request.
+  *
+  * @param BhaktijKoli\LaravelDialogflow\DialogflowRequest $request
+  * @return mixed
+  */
+  public function handle(DialogflowRequest $request)
+  {
+    $response = new DialogflowResponse($request);
+    return $response->addData([
+      'type' => 'info',
+      'title' => 'Hello from Webhook',
+    ]);
+  }
+
+}
