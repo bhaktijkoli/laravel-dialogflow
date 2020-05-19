@@ -23,7 +23,7 @@ class DialogflowResponse {
   *
   * @var array
   */
-  private $followupEventInput = array();
+  private $followupEventInput;
 
   /**
   * Response Output Contexts.
@@ -95,13 +95,13 @@ class DialogflowResponse {
   }
 
   /**
-   * Returns the Response as an string.
-   *
-   * @return string
-   */
+  * Returns the Response as an string.
+  *
+  * @return string
+  */
   public function __toString()
   {
-    $response = array(
+    $response = [
       'fulfillmentMessages' => array(
         array(
           'payload' => array(
@@ -110,10 +110,12 @@ class DialogflowResponse {
             )
           )
         )
-      ),
-      'outputContexts' => $this->outputContexts,
-      'followupEventInput' => $this->followupEventInput
-    );
+      )
+    ];
+    $response['outputContexts'] = $this->outputContexts;
+    if($this->followupEventInput) {
+      $response['followupEventInput'] = $this->followupEventInput;
+    }
     return json_encode($response);
   }
 

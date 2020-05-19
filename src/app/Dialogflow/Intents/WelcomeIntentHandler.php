@@ -3,6 +3,7 @@ namespace App\Dialogflow\Intents;
 
 use BhaktijKoli\LaravelDialogflow\IntentHandler;
 use BhaktijKoli\LaravelDialogflow\DialogflowRequest;
+use BhaktijKoli\LaravelDialogflow\DialogflowResponse;
 use BhaktijKoli\LaravelDialogflow\DialogflowQuickResponse;
 
 class WelcomeIntentHandler extends IntentHandler
