@@ -31,7 +31,8 @@ class LaravelDialogflowServiceProvider extends ServiceProvider
 
     if ($this->app->runningInConsole()) {
       $this->commands([
-        \BhaktijKoli\LaravelDialogflow\Commands\DialogflowIntent::class,
+        \BhaktijKoli\LaravelDialogflow\Commands\DialogflowInstall::class,
+        \BhaktijKoli\LaravelDialogflow\Commands\DialogflowIntent::class
       ]);
     }
 
