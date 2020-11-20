@@ -7,25 +7,25 @@ use Illuminate\Support\ServiceProvider;
 class LaravelDialogflowServiceProvider extends ServiceProvider
 {
   /**
-  * Register services.
-  *
-  * @return void
-  */
+   * Register services.
+   *
+   * @return void
+   */
   public function register()
   {
-    $this->app->bind('Fulfillment',function() {
+    $this->app->bind('Fulfillment', function () {
       return new Fulfillment();
     });
   }
 
   /**
-  * Bootstrap services.
-  *
-  * @return void
-  */
+   * Bootstrap services.
+   *
+   * @return void
+   */
   public function boot()
   {
-    if(file_exists(base_path('routes/dialogflow-intents.php'))) {
+    if (file_exists(base_path('routes/dialogflow-intents.php'))) {
       require base_path('routes/dialogflow-intents.php');
     }
 
@@ -36,14 +36,18 @@ class LaravelDialogflowServiceProvider extends ServiceProvider
       ]);
     }
 
-    $this->loadRoutesFrom(__DIR__.'/routes/web.php');
+    $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
 
     $this->publishes([
-      __DIR__.'/routes/dialogflow-intents.php' => base_path('routes/dialogflow-intents.php')
+      __DIR__ . '/config/dialogflow.php' => config_path('dialogflow.php'),
+    ]);
+
+    $this->publishes([
+      __DIR__ . '/routes/dialogflow-intents.php' => base_path('routes/dialogflow-intents.php')
     ], 'routes');
 
     $this->publishes([
-      __DIR__.'/app/Dialogflow/Intents/WelcomeIntentHandler.php' => base_path('app/Dialogflow/Intents/WelcomeIntentHandler.php')
+      __DIR__ . '/app/Dialogflow/Intents/WelcomeIntentHandler.php' => base_path('app/Dialogflow/Intents/WelcomeIntentHandler.php')
     ], 'handler');
   }
 }

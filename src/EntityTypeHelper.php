@@ -15,7 +15,7 @@ class EntityTypeHelper
     public static function getClient()
     {
         return new EntityTypesClient([
-            'credentials' => base_path('google-credentials.json')
+            'credentials' => base_path(config('dialogflow.credentials'))
         ]);
     }
 
@@ -29,7 +29,7 @@ class EntityTypeHelper
     public static function create($name, $entities)
     {
         $entityTypesClient = Self::getClient();
-        $formattedParent = $entityTypesClient->agentName('doctorappointment-oidy');
+        $formattedParent = $entityTypesClient->agentName(config('dialogflow.project'));
         $entityType = new EntityType([
             'display_name' => $name,
             'kind' => 2,
@@ -62,7 +62,7 @@ class EntityTypeHelper
     public static function get($name)
     {
         $entityTypesClient = Self::getClient();
-        $formattedParent = $entityTypesClient->agentName('doctorappointment-oidy');
+        $formattedParent = $entityTypesClient->agentName(config('dialogflow.project'));
         $pagedResponse = $entityTypesClient->listEntityTypes($formattedParent);
         foreach ($pagedResponse->iterateAllElements() as $element) {
             if ($element->getDisplayName() === $name) {
@@ -86,6 +86,7 @@ class EntityTypeHelper
             return Self::create($name, $entities);
         } else {
             $entityTypesClient = Self::getClient();
+            $entityType->setEntities($entities);
             return  $entityTypesClient->updateEntityType($entityType);
         }
     }
@@ -103,7 +104,7 @@ class EntityTypeHelper
             return null;
         } else {
             $entityTypesClient = Self::getClient();
-            $formattedName = $entityTypesClient->entityTypeName('doctorappointment-oidy', $typeId);
+            $formattedName = $entityTypesClient->entityTypeName(config('dialogflow.project'), $typeId);
             $entityTypesClient->deleteEntityType($formattedName);
         }
     }
