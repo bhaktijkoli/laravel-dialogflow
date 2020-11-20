@@ -3,6 +3,8 @@
 namespace BhaktijKoli\LaravelDialogflow;
 
 use Illuminate\Support\ServiceProvider;
+use BhaktijKoli\LaravelDialogflow\Commands\DialogflowIntent;
+use BhaktijKoli\LaravelDialogflow\Commands\DialogflowInstall;
 
 class LaravelDialogflowServiceProvider extends ServiceProvider
 {
@@ -31,8 +33,8 @@ class LaravelDialogflowServiceProvider extends ServiceProvider
 
     if ($this->app->runningInConsole()) {
       $this->commands([
-        \BhaktijKoli\LaravelDialogflow\Commands\DialogflowInstall::class,
-        \BhaktijKoli\LaravelDialogflow\Commands\DialogflowIntent::class
+        DialogflowInstall::class,
+        DialogflowIntent::class
       ]);
     }
 

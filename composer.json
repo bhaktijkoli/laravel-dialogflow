@@ -1,7 +1,12 @@
 {
     "name": "bhaktijkoli/laravel-dialogflow",
     "description": "Laravel Dialogflow",
-    "keywords": ["laravel Dialogflow", "package", "approval", "laravel"],
+    "keywords": [
+        "laravel Dialogflow",
+        "package",
+        "approval",
+        "laravel"
+    ],
     "license": "MIT",
     "authors": [
         {
