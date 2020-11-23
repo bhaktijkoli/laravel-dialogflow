@@ -2,24 +2,26 @@
 
 namespace BhaktijKoli\LaravelDialogflow;
 
-class DialogflowQuickResponse {
+class DialogflowQuickResponse
+{
 
   /**
-  * Response array.
-  *
-  * @var array
-  */
+   * Response array.
+   *
+   * @var array
+   */
   private $response;
 
   /**
-  * Dialogflow Quick Response Constructor.
-  *
-  * @param string $message
-  * @return void
-  */
+   * Dialogflow Quick Response Constructor.
+   *
+   * @param string $message
+   * @return void
+   */
   public function __construct(string $message)
   {
     $this->response = array(
+      'fulfillmentText' => $message,
       'fulfillmentMessages' => array(
         array(
           'text' => array(
@@ -41,5 +43,4 @@ class DialogflowQuickResponse {
   {
     return json_encode($this->response);
   }
-
 }
